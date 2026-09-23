@@ -116,3 +116,37 @@ document.querySelector("#stickyAppIcon").addEventListener("click", function() {
     noteDiv.appendChild(noteInput);
     container.appendChild(noteDiv);
 });
+
+// make windows draggable - super slick feature
+let activeWindow = null;
+let startX = 0;
+let startY = 0;
+
+document.querySelectorAll(".window").forEach(win => {
+    let header = win.querySelector(".windowheader");
+    if (header) {
+        header.addEventListener("mousedown", (e) => {
+            activeWindow = win;
+            startX = e.clientX - win.offsetLeft;
+            startY = e.clientY - win.offsetTop;
+            
+            // Bring to front when dragging
+            layerIndex++;
+            win.style.zIndex = layerIndex;
+        });
+    }
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (!activeWindow) return;
+    let newX = e.clientX - startX;
+    let newY = e.clientY - startY;
+    
+    activeWindow.style.left = newX + "px";
+    activeWindow.style.top = newY + "px";
+    activeWindow.style.transform = "none"; // removes the center transform so dragging works smoothly
+});
+
+document.addEventListener("mouseup", () => {
+    activeWindow = null;
+});
