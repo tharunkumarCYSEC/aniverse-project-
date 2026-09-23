@@ -1,54 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aniverse - Obito Uchiha OS</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
+<html lang="'en">
+    <head>
+        <meta charset="'UTF-8">
+        <meta name="viewport" content=" width=device-width, initial-scale=1.0">
+        <title> Aniverse - OBITO UCHIHA OS </title>
+        <link re="stylesheet" type="text/css" href="style.css" />
+     
+    </head>
+    <body>
 
-    <!-- Top Bar -->
-    <div class="top-bar" id="top">
-        <p class="os-name" id="welcomeopen" title="Click to open welcome window">Aniverse OS</p>
-        <p>👁️ Obito Uchiha Aesthetic</p>
-        <p class="time-display" id="timeElement">Loading time...</p>
-    </div>
-
-    <!-- Desktop Apps Area -->
-    <div id="desktopApps" style="padding-top: 64px; padding-left: 16px; display: flex; gap: 16px;">
-        <!-- Notes App Icon -->
-        <div id="notesappicon" style="text-align: center; padding: 12px; filter: drop-shadow(0 0 8px rgba(255,0,0,0.3)); width: fit-content; cursor: pointer;">
-            <img src="obito-bg.jpg" style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;">
-            <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight: 600;">Obito Logs</p>
+        <!--TOP BAR -->
+        <div clas="TOP-BAR" id="TOP">
+            <p class="OS-name" id=" Welcome">Aniverse OS</p>
+            <p> OBITO UCHIHA Aesthetic OS</p>
+            <p id="themetooglebtn" style="cursor: pointer; background-color: rgba(255, 153,0, 0.2);">Change VIBE</p>
+            <p id="stickyAppIcon" style="cursor: pointer; background-color: rgba(255, 51, 51, 0.3);">ADD Sticky NOTES</p>\
+            <P class="Time-Display" id="timeElement">LOADING TIME.......</P>
         </div>
 
-        <!-- Advanced App Icon: Quotes / Lore Archive -->
-        <div id="loreappicon" style="text-align: center; padding: 12px; filter: drop-shadow(0 0 8px rgba(255,153,0,0.3)); width: fit-content; cursor: pointer;">
-            <img src="obito-bg.jpg" style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;">
-            <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight: 600;">Uchiha Lore</p>
-        </div>
-    </div>
 
-    <!-- Welcome Window -->
-    <div class="window" id="welcome" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
-        <div class="windowheader" id="welcomeheader">
-            <p class="headertext" style="margin-left: 16px;">Welcome Window</p>
-            <div class="closebutton" id="welcomeclose" title="Close window"></div>
-        </div>
-        <div style="padding: 20px 40px 40px 40px; text-align: center;">
+        <!--DESKTOP APPS AREA-->
+        <div id="DESKTOPAPPS" style="padding-top: 64px; padding-left: 16px; display: flex; gap: 16px; flex-wrap: wrap;">
+            <!--NOTES APP ICON -->
+            <div id="notesappicon" style="text-align: center; padding: 12px; cursor: pointer;">
+                <img src="obito-bg.jpg" style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;">
+                <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight: 600;">Obito Logs</p>
+
+            </div>
+            
+
+            <!-- LORE APP Icon-->
+             <div id="loreappicon" style="text-align: center; padding: 12px; cursor: pointer;">
+                <img src="obito-bg.jpg" style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;">
+                <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight: 600;">UCHIHA LORE</p>
+             </div>
+
+             <!-- Spotify Audio app icon-->
+              <div id="audioappicon" style="text-align: center; padding: 12px; cursor: pointer;">
+                <img src="obito-bg.jpg" style="width: 64px; border-radius: 16px; object-fit: cover;">
+                <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight:600;">OBITO THEME AUDIO</p>
+
+              </div>
+
+        </div>"
+
+        <!-- Contianer where dynamic sticky notes will apper-->
+         <div id="stickycontainer"></div>
+
+         <!--WELCOME WINDOW-->
+         <div class="window" id="welcome" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+         <div class="windowheader" id="welcomeheader">
+            <p class="headertext" style="margin-left: 16px;">WELCOME WINDOW</p>
+            <div class="closebutton" id="welcomeclose"></div>
+
+         </div>
+         <div style="padding: 20px 40px 40px 40px; text-align: center;">
             <h1>Aniverse Welcomes You</h1>
-            <h2>Hey there — from Obito Uchiha</h2>
-            <p class="content-text">Aniverse is a place where each page has its own aesthetic for each anime character.</p>
-            <p class="content-text">Personally, I'm <b>OBITO UCHIHA'S</b> biggest fan. I got inspired by his words of love and pain.</p>
-        </div>
-    </div>
+            <h2>HEY THERE  - from OBITO UCHIHA</h2>
+            <p class="content-text">Aniverse is a place where you can see the quotes of UCHIHA CLANS and do more
+            </p>
+         </div>
+         </div>
 
-    <!-- Notes App Window -->
+         <!-- Notes App Window -->
     <div class="window" id="notes" style="top: 55%; left: 45%; display: none;">
         <div class="windowheader" id="notesheader">
             <p class="headertext" style="margin-left: 16px;">Obito Logs</p>
-            <div class="closebutton" id="notesclose" title="Close window"></div>
+            <div class="closebutton" id="notesclose"></div>
         </div>
         <div class="notes-body">
             <div id="sidebar" class="notes-sidebar"></div>
@@ -56,23 +74,37 @@
         </div>
     </div>
 
-    <!-- Advanced App Window: Uchiha Lore Archive -->
+    <!-- Lore Archive Window -->
     <div class="window" id="lore" style="top: 40%; left: 35%; display: none; width: 500px;">
         <div class="windowheader" id="loreheader">
             <p class="headertext" style="margin-left: 16px;">Uchiha Lore & Quotes</p>
-            <div class="closebutton" id="loreclose" title="Close window"></div>
+            <div class="closebutton" id="loreclose"></div>
         </div>
         <div style="padding: 25px; text-align: center; color: #e0e0e0;">
             <h2 style="color: #ff9900; margin-top: 0;">The Path of Pain</h2>
             <p id="quoteDisplay" style="font-size: 1.15rem; font-style: italic; min-height: 80px; line-height: 1.6; color: #ffcccc;">
-                "People cannot show each other their true feelings. Fear, suspicion, and resentment never subside."
+                "People cannot show each other their true feelings..."
             </p>
-            <button id="nextQuoteBtn" style="background-color: #ff3333; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px; transition: background 0.2s;">
+            <button id="nextQuoteBtn" style="background-color: #ff3333; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px;">
                 Next Quote 👁️
             </button>
         </div>
     </div>
 
+    <!-- Audio Window (Spotify Embed) -->
+    <div class="window" id="audioWindow" style="top: 35%; left: 55%; display: none; width: 350px;">
+        <div class="windowheader" id="audioheader">
+            <p class="headertext" style="margin-left: 16px;">Obito Theme Music</p>
+            <div class="closebutton" id="audioclose"></div>
+        </div>
+        <div style="padding: 20px; text-align: center;">
+            <p style="color: #fff; margin-bottom: 15px;">Listen while you code:</p>
+            <!-- Standard Spotify Track Embed -->
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2plqbcAKf8n2aZk2H4h6S2?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </div>
+
     <script src="script.js"></script>
-</body>
+
+    </body>
 </html>
