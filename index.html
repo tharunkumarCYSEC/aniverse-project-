@@ -8,72 +8,88 @@
     </head>
     <body>
 
-        <!-- TOP BAR (dont break this layout pls) -->
+    
         <div class="top-bar" id="top">
             <p class="os-name" id="welcomeopen">Aniverse OS</p>
             <p>OBITO UCHIHA Aesthetic OS</p>
+            <p id="wallpaperBtn" style="cursor: pointer; background-color: rgba(0, 0, 0, 0.4);">Wallpaper: Red</p>
             <p id="themeToggleBtn" style="cursor: pointer; background-color: rgba(255, 153, 0, 0.2);">Change VIBE</p>
             <p id="stickyAppIcon" style="cursor: pointer; background-color: rgba(255, 51, 51, 0.3);">ADD Sticky NOTES</p>
             <p class="time-display" id="timeElement">LOADING TIME.......</p>
         </div>
 
-        <!-- desktop app icons container -->
+        
         <div id="desktopApps" style="padding-top: 64px; padding-left: 16px; display: flex; gap: 16px; flex-wrap: wrap;">
             
-            <!-- notes app icon -->
+            
             <div id="notesappicon" style="text-align: center; padding: 12px; cursor: pointer;">
                 <img src="obito-bg.jpg" style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;">
                 <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight: 600;">Obito Logs</p>
             </div>
             
-            <!-- lore archive icon -->
+            
             <div id="loreappicon" style="text-align: center; padding: 12px; cursor: pointer;">
                 <img src="obito-bg.jpg" style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;">
                 <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight: 600;">UCHIHA LORE</p>
             </div>
 
-            <!-- spotify player window icon -->
+            
             <div id="audioappicon" style="text-align: center; padding: 12px; cursor: pointer;">
                 <img src="obito-bg.jpg" style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;">
                 <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight: 600;">OBITO THEME AUDIO</p>
             </div>
+
+            
+            <div id="terminalAppIcon" style="text-align: center; padding: 12px; cursor: pointer;">
+                <img src="obito-bg.jpg" style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;">
+                <p style="margin: 4px 0 0 0; color: #fff; font-size: 0.85rem; font-weight: 600;">Terminal</p>
+            </div>
         </div>
 
-        <!-- where sticky notes dynamically spawn -->
+        
         <div id="stickyContainer"></div>
 
-        <!-- WELCOME WINDOW popup -->
+        
         <div class="window" id="welcome" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
             <div class="windowheader" id="welcomeheader">
                 <p class="headertext" style="margin-left: 16px;">WELCOME WINDOW</p>
-                <div class="closebutton" id="welcomeclose"></div>
+                <div>
+                    <span class="min-btn" style="cursor: pointer; color: #aaa; margin-right: 10px; font-weight: bold;">_</span>
+                    <div class="closebutton" id="welcomeclose" style="display: inline-block; vertical-align: middle;"></div>
+                </div>
             </div>
-            <div style="padding: 20px 40px 40px 40px; text-align: center;">
+            <div class="window-content" style="padding: 20px 40px 40px 40px; text-align: center;">
                 <h1>Aniverse Welcomes You</h1>
                 <h2>HEY THERE - from OBITO UCHIHA</h2>
                 <p class="content-text">Aniverse is a place where you can see the quotes of UCHIHA CLANS and do more</p>
             </div>
         </div>
 
-        <!-- Notes App Window -->
+        
         <div class="window" id="notes" style="top: 55%; left: 45%; display: none;">
             <div class="windowheader" id="notesheader">
                 <p class="headertext" style="margin-left: 16px;">Obito Logs</p>
-                <div class="closebutton" id="notesclose"></div>
+                <div>
+                    <span class="min-btn" style="cursor: pointer; color: #aaa; margin-right: 10px; font-weight: bold;">_</span>
+                    <div class="closebutton" id="notesclose" style="display: inline-block; vertical-align: middle;"></div>
+                </div>
             </div>
-            <div class="notes-body">
+            <div class="window-content notes-body">
                 <div id="sidebar" class="notes-sidebar"></div>
                 <div class="notes-content-area" id="notesContentDisplay"></div>
             </div>
         </div>
 
-        <!-- Lore Archive Window -->
+    
         <div class="window" id="lore" style="top: 40%; left: 35%; display: none; width: 500px;">
             <div class="windowheader" id="loreheader">
                 <p class="headertext" style="margin-left: 16px;">Uchiha Lore & Quotes</p>
-                <div class="closebutton" id="loreclose"></div>
+                <div>
+                    <span class="min-btn" style="cursor: pointer; color: #aaa; margin-right: 10px; font-weight: bold;">_</span>
+                    <div class="closebutton" id="loreclose" style="display: inline-block; vertical-align: middle;"></div>
+                </div>
             </div>
-            <div style="padding: 25px; text-align: center; color: #e0e0e0;">
+            <div class="window-content" style="padding: 25px; text-align: center; color: #e0e0e0;">
                 <h2 style="color: #ff9900; margin-top: 0;">The Path of Pain</h2>
                 <p id="quoteDisplay" style="font-size: 1.15rem; font-style: italic; min-height: 80px; line-height: 1.6; color: #ffcccc;">
                     "People cannot show each other their true feelings..."
@@ -85,19 +101,39 @@
         </div>
 
         
-<div class="window" id="audioWindow" style="top: 35%; left: 55%; display: none; width: 350px;">
-    <div class="windowheader" id="audioheader">
-        <p class="headertext" style="margin-left: 16px;">Obito Theme Music</p>
-        <div class="closebutton" id="audioclose"></div>
-    </div>
-    <div style="padding: 20px; text-align: center;">
-        <p style="color: #fff; margin-bottom: 15px;">playing your custom track:</p>
-        <audio controls style="width: 100%;">
-            <source src="song.mp3" type="audio/mpeg">
-            your browser doesn't support audio element lol.
-        </audio>
-    </div>
-</div>
+        <div class="window" id="audioWindow" style="top: 35%; left: 55%; display: none; width: 350px;">
+            <div class="windowheader" id="audioheader">
+                <p class="headertext" style="margin-left: 16px;">Obito Theme Music</p>
+                <div>
+                    <span class="min-btn" style="cursor: pointer; color: #aaa; margin-right: 10px; font-weight: bold;">_</span>
+                    <div class="closebutton" id="audioclose" style="display: inline-block; vertical-align: middle;"></div>
+                </div>
+            </div>
+            <div class="window-content" style="padding: 20px; text-align: center;">
+                <p style="color: #fff; margin-bottom: 15px;">playing your custom track:</p>
+                <audio controls style="width: 100%;">
+                    <source src="song.mp3" type="audio/mpeg">
+                    your browser doesn't support audio element lol.
+                </audio>
+            </div>
+        </div>
+
+    
+        <div class="window" id="terminalWindow" style="top: 40%; left: 40%; display: none; width: 400px; height: 240px;">
+            <div class="windowheader" id="terminalheader">
+                <p class="headertext" style="margin-left: 16px;">obito_term.exe</p>
+                <div>
+                    <span class="min-btn" style="cursor: pointer; color: #aaa; margin-right: 10px; font-weight: bold;">_</span>
+                    <div class="closebutton" id="terminalclose" style="display: inline-block; vertical-align: middle;"></div>
+                </div>
+            </div>
+            <div class="window-content" style="padding: 10px; background: #000; color: #0f0; font-family: monospace; height: calc(100% - 50px); display: flex; flex-direction: column;">
+                <div id="termOutput" style="flex-grow: 1; overflow-y: auto; margin-bottom: 5px; font-size: 12px;">
+                    Type 'help' for commands...<br>
+                </div>
+                <input type="text" id="termInput" placeholder="type command..." style="background: #111; color: #0f0; border: 1px solid #333; padding: 5px; font-family: monospace;">
+            </div>
+        </div>
 
         <script src="script.js"></script>
     </body>

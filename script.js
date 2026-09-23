@@ -26,6 +26,10 @@ document.querySelector("#audioappicon").addEventListener("click", function() {
     openMyWindow(document.querySelector("#audioWindow"));
 });
 
+document.querySelector("#terminalAppIcon").addEventListener("click", function() {
+    openMyWindow(document.querySelector("#terminalWindow"));
+});
+
 document.querySelector("#welcomeclose").addEventListener("click", function() {
     closeMyWindow(document.querySelector("#welcome"));
 });
@@ -37,6 +41,9 @@ document.querySelector("#loreclose").addEventListener("click", function() {
 });
 document.querySelector("#audioclose").addEventListener("click", function() {
     closeMyWindow(document.querySelector("#audioWindow"));
+});
+document.querySelector("#terminalclose").addEventListener("click", function() {
+    closeMyWindow(document.querySelector("#terminalWindow"));
 });
 
 var myQuotes = [
@@ -87,7 +94,47 @@ document.querySelector("#themeToggleBtn").addEventListener("click", function() {
     }
 });
 
-// sticky notes app - made them movable so reviewers stop complaining
+var wallIndex = 0;
+var wallColors = [
+    "url('obito-bg.jpg') center/cover no-repeat",
+    "radial-gradient(circle, #1a0000 0%, #000000 100%)",
+    "radial-gradient(circle, #0a0a1a 0%, #000000 100%)"
+];
+var wallNames = ["Red", "Dark Void", "Midnight"];
+
+document.querySelector("#wallpaperBtn").addEventListener("click", function() {
+    wallIndex = (wallIndex + 1) % wallColors.length;
+    document.body.style.background = wallColors[wallIndex];
+    this.innerHTML = "Wallpaper: " + wallNames[wallIndex];
+});
+
+
+let termInput = document.querySelector("#termInput");
+let termOutput = document.querySelector("#termOutput");
+
+termInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        let val = termInput.value.trim().toLowerCase();
+        termOutput.innerHTML += `> ${termInput.value}<br>`;
+        
+        if (val === "help") {
+            termOutput.innerHTML += `commands: help, clear, lore, creator<br>`;
+        } else if (val === "clear") {
+            termOutput.innerHTML = `Cleared.<br>`;
+        } else if (val === "lore") {
+            termOutput.innerHTML += `Obito Uchiha wanted to create an infinite dream.<br>`;
+        } else if (val === "creator") {
+            termOutput.innerHTML += `Built by a 17-year-old grinding for that AULA F75 keyboard.<br>`;
+        } else {
+            termOutput.innerHTML += `Unknown: ${val}. Type 'help'.<br>`;
+        }
+        
+        termInput.value = "";
+        termOutput.scrollTop = termOutput.scrollHeight;
+    }
+});
+
+
 document.querySelector("#stickyAppIcon").addEventListener("click", function() {
     let container = document.querySelector("#stickyContainer");
     
@@ -96,25 +143,31 @@ document.querySelector("#stickyAppIcon").addEventListener("click", function() {
     noteDiv.style.position = "absolute";
     noteDiv.style.left = "120px";
     noteDiv.style.top = "160px";
-    noteDiv.style.background = "#222";
-    noteDiv.style.border = "1px solid #ff3333";
+    noteDiv.style.background = "#ffcc00";
+    noteDiv.style.color = "#000";
     noteDiv.style.padding = "10px";
-    noteDiv.style.borderRadius = "6px";
+    noteDiv.style.borderRadius = "8px";
+    noteDiv.style.width = "200px";
+    noteDiv.style.height = "150px";
+    noteDiv.style.boxShadow = "0 4px 10px rgba(0,0,0,0.5)";
     
     layerIndex++;
     noteDiv.style.zIndex = layerIndex;
     
     let noteTitle = document.createElement("b");
     noteTitle.innerText = "Sticky Note:";
-    noteTitle.style.color = "#fff";
     noteTitle.style.cursor = "grab";
     
     let noteInput = document.createElement("textarea");
     noteInput.placeholder = "Type your note here...";
-    noteInput.style.background = "#111";
-    noteInput.style.color = "#fff";
+    noteInput.style.width = "100%";
+    noteInput.style.height = "80%";
+    noteInput.style.background = "transparent";
     noteInput.style.border = "none";
-    noteInput.style.marginTop = "5px";
+    noteInput.style.resize = "none";
+    noteInput.style.outline = "none";
+    noteInput.style.fontFamily = "inherit";
+    noteInput.style.color = "#000";
     
     let deleteBtn = document.createElement("button");
     deleteBtn.innerText = "X";
@@ -128,13 +181,13 @@ document.querySelector("#stickyAppIcon").addEventListener("click", function() {
         container.removeChild(noteDiv);
     });
 
-    // drag logic for sticky notes
+  
     let draggingSticky = false;
     let sX = 0;
     let sY = 0;
 
     noteDiv.addEventListener("mousedown", function(e) {
-        if (e.target === noteInput) return; // let them type normally
+        if (e.target === noteInput) return;
         draggingSticky = true;
         sX = e.clientX - noteDiv.offsetLeft;
         sY = e.clientY - noteDiv.offsetTop;
@@ -159,7 +212,19 @@ document.querySelector("#stickyAppIcon").addEventListener("click", function() {
     container.appendChild(noteDiv);
 });
 
-// make windows draggable
+document.querySelectorAll(".min-btn").forEach(btn => {
+    btn.addEventListener("click", function() {
+        let win = this.closest(".window");
+        let content = win.querySelector(".window-content");
+        if (content.style.display === "none") {
+            content.style.display = "flex";
+            if(win.id === "notes") content.style.display = "flex";
+        } else {
+            content.style.display = "none";
+        }
+    });
+});
+
 let activeWindow = null;
 let startX = 0;
 let startY = 0;
@@ -168,6 +233,7 @@ document.querySelectorAll(".window").forEach(win => {
     let header = win.querySelector(".windowheader");
     if (header) {
         header.addEventListener("mousedown", (e) => {
+            if (e.target.classList.contains("min-btn") || e.target.classList.contains("closebutton")) return;
             activeWindow = win;
             startX = e.clientX - win.offsetLeft;
             startY = e.clientY - win.offsetTop;
