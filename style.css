@@ -6,9 +6,10 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
-    font-family: 'segoe UI', Tahoma, Geneva, verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.top-bar { 
+
+.top_bar { 
     position: absolute;
     top: 0;
     width: 100%;
@@ -16,115 +17,219 @@ body {
     justify-content: space-between;
     align-items: center;
     backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
     color: #fff; 
     box-sizing: border-box;
     z-index: 100;
-}
-.top-bar p{ 
-    background-color: rgba(255, 255, 255, 0.15);
-    padding: 6px;
-    border-radius: 16px;
-    font-size: 0.9rem;
-    margin: 6px 10px;
+    padding: 6px 16px;
 }
 
-.top-bar  .os-name {
-    margin-left: 20px;
+.os_brand {
     font-weight: 700;
     color: #ff3333;
     cursor: pointer;
 }
 
-.top-bar .time-display { 
-    margin-right: 20px;
-    color: #ff9900;
+.apps_panel {
+    display: flex;
+    gap: 10px;
 }
 
-.window{
+.app_trigger {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.app_trigger:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.time_display { 
+    color: #ff9900;
+    font-family: monospace;
+    font-weight: 600;
+}
+
+.desktop_apps {
+    padding-top: 64px;
+    padding-left: 16px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.desktop_icon {
+    text-align: center;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.desktop_icon img {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.desktop_icon span {
+    display: block;
+    margin-top: 4px;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* App Window Framework matching the previous pattern */
+.app_window {
     border: 1px solid rgba(255, 51, 51, 0.4);
     display: flex;
     flex-direction: column;
-    border-radius: 16px;
+    border-radius: 12px;
     position: absolute;
     backdrop-filter: blur(8px);
-    background-color: rgba(18, 18, 18, 0.85);
+    background-color: rgba(18, 18, 18, 0.88);
     box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
     color: #f1f1f1;
-    width:90%;
+    width: 90%;
     max-width: 650px;
     z-index: 50;
+    overflow: hidden;
 }
 
-.windowheader {
+.dragzone {
     width: 100%;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    cursor: grab;
     justify-content: space-between;
-    margin-top: 8px;
-    padding-bottom: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    box-sizing: border-box;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.windowheader:active {
+.dragzone:active {
     cursor: grabbing;
 }
 
-.headertext {
-    margin: 0px;
+.dragzone span {
     color: #ff9900;
-    font-weight: 500;
+    font-family: monospace;
+    font-size: 0.9rem;
 }
 
-.closebutton {
-    width: 16px;
-    height: 16px;
+.close_btn {
+    background: none;
+    border: none;
     cursor: pointer;
-    background-color: #ff3333;
-    border-radius: 16px;
-    margin-right: 16px;
+    font-size: 0.9rem;
 }
 
-.notes-body {
+.app_main {
+    padding: 16px;
+}
+
+/* Specific App Layouts */
+.welcome_content {
+    text-align: center;
+    padding: 20px 40px 40px 40px;
+}
+
+.notes_body {
     background-color: #121212;
     margin: 8px;
-    border-radius: 12px;
-    height: 420px;
-    padding: 12px;
+    border-radius: 10px;
+    height: 400px;
     display: flex;
     gap: 12px;
+    padding: 0;
 }
 
-.notes-sidebar {
+.notes_sidebar {
     background-color: #1a1a1a;
     width: 180px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.notes-sidebar div {
+.notes_sidebar div {
     background-color: #262626;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
-.notes-content-area {
+.notes_content_area {
     flex-grow: 1;
     background-color: #1a1a1a;
     padding: 16px;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow-y: auto;
     color: #e0e0e0;
 }
 
+.lore_main {
+    text-align: center;
+    color: #e0e0e0;
+}
 
-.sticky-note {
+.quote_text {
+    font-size: 1.15rem;
+    font-style: italic;
+    min-height: 80px;
+    line-height: 1.6;
+    color: #ffcccc;
+}
+
+.action_btn {
+    background-color: #ff3333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.console_main {
+    background: #000;
+    color: #0f0;
+    font-family: monospace;
+    height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.term_output {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.term_input {
+    background: #111;
+    color: #0f0;
+    border: 1px solid #333;
+    padding: 6px;
+    font-family: monospace;
+    outline: none;
+}
+
+.sticky_note {
     position: absolute;
     top: 150px;
     left: 200px;
@@ -139,9 +244,9 @@ body {
     z-index: 40;
 }
 
-.sticky-note textarea {
+.sticky_note textarea {
     width: 100%;
-    height: 80%;
+    height: 75%;
     background: transparent;
     border: none;
     resize: none;
@@ -150,5 +255,5 @@ body {
     color: #000;
 }
 
-h1 { color: #ff3333; text-transform: uppercase; font-size: 1.8rem; }
-h2 { color: #ff9900; font-size: 1.2rem; }
+h1 { color: #ff3333; text-transform: uppercase; font-size: 1.8rem; margin: 0 0 10px 0; }
+h2 { color: #ff9900; font-size: 1.2rem; margin: 0 0 10px 0; }
