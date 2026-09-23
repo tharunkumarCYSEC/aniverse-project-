@@ -84,17 +84,20 @@
             </div>
         </div>
 
-        <!-- Audio Window (Spotify Embed) - vibe music while coding -->
-        <div class="window" id="audioWindow" style="top: 35%; left: 55%; display: none; width: 350px;">
-            <div class="windowheader" id="audioheader">
-                <p class="headertext" style="margin-left: 16px;">Obito Theme Music</p>
-                <div class="closebutton" id="audioclose"></div>
-            </div>
-            <div style="padding: 20px; text-align: center;">
-                <p style="color: #fff; margin-bottom: 15px;">Listen while you code:</p>
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2plqbcAKf8n2aZk2H4h6S2?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-        </div>
+        
+<div class="window" id="audioWindow" style="top: 35%; left: 55%; display: none; width: 350px;">
+    <div class="windowheader" id="audioheader">
+        <p class="headertext" style="margin-left: 16px;">Obito Theme Music</p>
+        <div class="closebutton" id="audioclose"></div>
+    </div>
+    <div style="padding: 20px; text-align: center;">
+        <p style="color: #fff; margin-bottom: 15px;">playing your custom track:</p>
+        <audio controls style="width: 100%;">
+            <source src="song.mp3" type="audio/mpeg">
+            your browser doesn't support audio element lol.
+        </audio>
+    </div>
+</div>
 
         <script src="script.js"></script>
     </body>
