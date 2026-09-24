@@ -1,124 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aniverse - OBITO UCHIHA OS (best anime os fr)</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>obito os</title>
+<link rel="stylesheet" href="style.css">
 </head>
-<body id="body">
+<body>
 
-    <!-- Top Bar / Taskbar -->
-    <header class="top_bar" id="top">
-        <div class="os_brand" id="welcome_open">
-            <span>[ ANIVERSE OS™ © ]</span>
-        </div>
-        <div class="apps_panel">
-            <button class="app_trigger" id="wallpaper_btn">Wallpaper: Red</button>
-            <button class="app_trigger" id="theme_toggle_btn">Change VIBE</button>
-            <button class="app_trigger" id="sticky_app_icon">ADD Sticky NOTES</button>
-        </div>
-        <div class="info_panel">
-            <span class="time_display" id="time_element">LOADING...</span>
-        </div>
-    </header>
+<!-- top bar -->
+<div id="topbar">
+  <span id="logo" onclick="openWin('welcome')">👁 OBITO OS</span>
+  <span id="clock">00:00:00</span>
+</div>
 
-    <main>
-        <!-- Desktop Icons Grid -->
-        <div class="desktop_apps" id="desktop_apps">
-            <div class="desktop_icon" id="notes_app_icon">
-                <img src="obito-bg.jpg" alt="Obito Logs">
-                <span>Obito Logs</span>
-            </div>
-            <div class="desktop_icon" id="lore_app_icon">
-                <img src="obito-bg.jpg" alt="Uchiha Lore">
-                <span>UCHIHA LORE</span>
-            </div>
-            <div class="desktop_icon" id="audio_app_icon">
-                <img src="obito-bg.jpg" alt="Obito Theme">
-                <span>OBITO THEME AUDIO</span>
-            </div>
-            <div class="desktop_icon" id="terminal_app_icon">
-                <img src="obito-bg.jpg" alt="Terminal">
-                <span>Terminal</span>
-            </div>
-        </div>
+<!-- desktop icons -->
+<div id="icons">
+  <div class="icon" onclick="openWin('logs')">📓<p>logs</p></div>
+  <div class="icon" onclick="openWin('lore')">🔥<p>lore</p></div>
+  <div class="icon" onclick="openWin('music')">🎵<p>music</p></div>
+  <div class="icon" onclick="openWin('term')">💻<p>terminal</p></div>
+</div>
 
-        <!-- Sticky Notes Container -->
-        <div id="sticky_container"></div>
+<!-- welcome window -->
+<div class="win" id="welcome" style="top:130px; left:280px;">
+  <div class="bar" id="welcomeheader">welcome.exe <span class="x" onclick="closeWin('welcome')">x</span></div>
+  <div class="content">
+    <h1>Welcome to Obito OS</h1>
+    <p>read the uchiha quotes, listen to music, write sticky notes and mess with the terminal. click the eye on the top left to open this again</p>
+  </div>
+</div>
 
-        <!-- Welcome Window -->
-        <div class="app_window" id="welcome" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <div class="dragzone" id="welcome_dragzone">
-                <span>> welcome.app</span>
-                <button class="close_btn" id="welcome_close">❌</button>
-            </div>
-            <div class="app_main welcome_content">
-                <h1>Aniverse Welcomes You</h1>
-                <h2>HEY THERE - from OBITO UCHIHA</h2>
-                <p class="content_text">Aniverse is a place where you can see the quotes of UCHIHA CLANS and do more</p>
-            </div>
-        </div>
+<!-- logs window -->
+<div class="win" id="logs" style="top:200px; left:340px;">
+  <div class="bar" id="logsheader">obito_logs <span class="x" onclick="closeWin('logs')">x</span></div>
+  <div class="content">
+    <div id="sidebar"></div>
+    <div id="notetext"></div>
+  </div>
+</div>
 
-        <!-- Notes App -->
-        <div class="app_window" id="notes" style="top: 55%; left: 45%; display: none;">
-            <div class="dragzone" id="notes_dragzone">
-                <span>> obito_logs.app</span>
-                <button class="close_btn" id="notes_close">❌</button>
-            </div>
-            <div class="app_main notes_body">
-                <div id="sidebar" class="notes_sidebar"></div>
-                <div class="notes_content_area" id="notes_content_display"></div>
-            </div>
-        </div>
+<!-- lore window -->
+<div class="win" id="lore" style="top:160px; left:200px;">
+  <div class="bar" id="loreheader">uchiha_lore <span class="x" onclick="closeWin('lore')">x</span></div>
+  <div class="content">
+    <h3>The Path of Pain</h3>
+    <p id="quote">"People cannot show each other their true feelings."</p>
+    <button class="btn" onclick="nextQuote()">next quote 👁</button>
+  </div>
+</div>
 
-        <!-- Lore App -->
-        <div class="app_window" id="lore" style="top: 40%; left: 35%; display: none; width: 500px;">
-            <div class="dragzone" id="lore_dragzone">
-                <span>> uchiha_lore.app</span>
-                <button class="close_btn" id="lore_close">❌</button>
-            </div>
-            <div class="app_main lore_main">
-                <h2 style="color: #ff9900; margin-top: 0;">The Path of Pain</h2>
-                <p id="quote_display" class="quote_text">
-                    "People cannot show each other their true feelings..."
-                </p>
-                <button id="next_quote_btn" class="action_btn">
-                    Next Quote 👁️
-                </button>
-            </div>
-        </div>
+<!-- music window -->
+<div class="win" id="music" style="top:250px; left:420px; width:300px;">
+  <div class="bar" id="musicheader">music_player <span class="x" onclick="closeWin('music')">x</span></div>
+  <div class="content">
+    <p>now playing: my song</p>
+    <audio controls src="song.mp3" style="width:100%;"></audio>
+  </div>
+</div>
 
-        <!-- Audio App -->
-        <div class="app_window" id="audio_window" style="top: 35%; left: 55%; display: none; width: 350px;">
-            <div class="dragzone" id="audio_dragzone">
-                <span>> audio_player.app</span>
-                <button class="close_btn" id="audio_close">❌</button>
-            </div>
-            <div class="app_main audio_main">
-                <p style="color: #fff; margin-bottom: 15px;">playing your custom track:</p>
-                <audio controls style="width: 100%;">
-                    <source src="song.mp3" type="audio/mpeg">
-                    your browser doesn't support audio element lol.
-                </audio>
-            </div>
-        </div>
+<!-- terminal window -->
+<div class="win" id="term" style="top:180px; left:500px;">
+  <div class="bar" id="termheader">terminal <span class="x" onclick="closeWin('term')">x</span></div>
+  <div id="termout">type help to see commands<br></div>
+  <input type="text" id="terminput" placeholder="type here and press enter">
+</div>
 
-        <!-- Terminal App -->
-        <div class="app_window" id="terminal_window" style="top: 40%; left: 40%; display: none; width: 400px; height: 240px;">
-            <div class="dragzone" id="terminal_dragzone">
-                <span>> obito_term.exe</span>
-                <button class="close_btn" id="terminal_close">❌</button>
-            </div>
-            <div class="app_main console_main">
-                <div id="term_output" class="term_output">
-                    Type 'help' for commands...<br>
-                </div>
-                <input type="text" id="term_input" placeholder="type command..." class="term_input">
-            </div>
-        </div>
-    </main>
+<!-- bottom dock -->
+<div id="dock">
+  <button onclick="changeWall()">🖼 wallpaper</button>
+  <button onclick="toggleVibe()">👁 sharingan</button>
+  <button onclick="addSticky()">📝 sticky</button>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

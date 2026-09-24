@@ -1,195 +1,162 @@
-var layerIndex = 10;
+// obito os script
+// tried to keep it simple lol
 
-function openMyWindow(winElement) {
-    winElement.style.display = "flex";
-    layerIndex++;
-    winElement.style.zIndex = layerIndex;
+var z = 10; // z-index counter so the newest window stays on top
+
+function openWin(name) {
+  var w = document.getElementById(name);
+  w.style.display = "block";
+  z = z + 1;
+  w.style.zIndex = z;
 }
 
-function closeMyWindow(winElement) {
-    winElement.style.display = "none";
+function closeWin(name) {
+  document.getElementById(name).style.display = "none";
 }
 
-// Window Open Event Listeners
-document.querySelector("#welcome_open").addEventListener("click", () => openMyWindow(document.querySelector("#welcome")));
-document.querySelector("#notes_app_icon").addEventListener("click", () => openMyWindow(document.querySelector("#notes")));
-document.querySelector("#lore_app_icon").addEventListener("click", () => openMyWindow(document.querySelector("#lore")));
-document.querySelector("#audio_app_icon").addEventListener("click", () => openMyWindow(document.querySelector("#audio_window")));
-document.querySelector("#terminal_app_icon").addEventListener("click", () => openMyWindow(document.querySelector("#terminal_window")));
+// dragging - got this from w3schools and changed it a bit
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var header = document.getElementById(elmnt.id + "header");
+  header.onmousedown = dragMouseDown;
 
-// Window Close Event Listeners
-document.querySelector("#welcome_close").addEventListener("click", () => closeMyWindow(document.querySelector("#welcome")));
-document.querySelector("#notes_close").addEventListener("click", () => closeMyWindow(document.querySelector("#notes")));
-document.querySelector("#lore_close").addEventListener("click", () => closeMyWindow(document.querySelector("#lore")));
-document.querySelector("#audio_close").addEventListener("click", () => closeMyWindow(document.querySelector("#audio_window")));
-document.querySelector("#terminal_close").addEventListener("click", () => closeMyWindow(document.querySelector("#terminal_window")));
+  function dragMouseDown(e) {
+    e.preventDefault();
+    z++;
+    elmnt.style.zIndex = z;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
 
-// Quotes Rotation
-var myQuotes = [
-    "\"People cannot show each other their true feelings.\"",
-    "\"Wake up to reality! Nothing ever goes as planned.\"",
-    "\"The moment people come to know love, they run the risk of carrying hate.\""
+  function elementDrag(e) {
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+dragElement(document.getElementById("welcome"));
+dragElement(document.getElementById("logs"));
+dragElement(document.getElementById("lore"));
+dragElement(document.getElementById("music"));
+dragElement(document.getElementById("term"));
+
+// ---------- clock ----------
+function updateClock() {
+  var d = new Date();
+  document.getElementById("clock").innerHTML = d.toLocaleTimeString();
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ---------- quotes ----------
+var quotes = [
+  '"People cannot show each other their true feelings."',
+  '"Wake up to reality! Nothing ever goes as planned."',
+  '"The moment people come to know love, they run the risk of carrying hate."',
+  '"Those who break the rules are scum, but those who abandon their friends are worse than scum."'
 ];
-var quoteNum = 0;
+var q = 0;
 
-document.querySelector("#next_quote_btn").addEventListener("click", function() {
-    quoteNum = (quoteNum + 1) % myQuotes.length;
-    document.querySelector("#quote_display").innerHTML = myQuotes[quoteNum];
-});
+function nextQuote() {
+  q++;
+  if (q >= quotes.length) {
+    q = 0;
+  }
+  document.getElementById("quote").innerHTML = quotes[q];
+}
 
-// Notes Sidebar Population
-var myNotes = [
-    { title: "The Reality", text: "<p>Pain, suffering, and futility are all that exist.</p>" },
-    { title: "Infinite Dream", text: "<p>A world where everyone's desires come true.</p>" }
+// ---------- logs ----------
+var notes = [
+  ["The Reality", "Pain, suffering, and futility are all that exist."],
+  ["Infinite Dream", "A world where everyones desires come true."],
+  ["Kamui", "His eye power lets him go intangible or send stuff to another dimension."]
 ];
 
-var sidebarBox = document.querySelector("#sidebar");
-var notesArea = document.querySelector("#notes_content_display");
-
-for (let i = 0; i < myNotes.length; i++) {
-    let itemDiv = document.createElement("div");
-    itemDiv.innerHTML = "<b>" + myNotes[i].title + "</b>";
-    itemDiv.addEventListener("click", () => notesArea.innerHTML = myNotes[i].text);
-    sidebarBox.appendChild(itemDiv);
+var sidebar = document.getElementById("sidebar");
+for (var i = 0; i < notes.length; i++) {
+  sidebar.innerHTML += '<button onclick="showNote(' + i + ')">' + notes[i][0] + '</button>';
 }
-notesArea.innerHTML = myNotes[0].text;
 
-// Live Clock
-function showLiveTime() {
-    document.querySelector("#time_element").innerHTML = new Date().toLocaleTimeString();
+function showNote(n) {
+  document.getElementById("notetext").innerHTML = "<h3>" + notes[n][0] + "</h3><p>" + notes[n][1] + "</p>";
 }
-setInterval(showLiveTime, 1000);
+showNote(0);
 
-// Vibe / Theme Toggler
-var isNormalVibe = true;
-document.querySelector("#theme_toggle_btn").addEventListener("click", function() {
-    isNormalVibe = !isNormalVibe;
-    if (isNormalVibe) {
-        document.body.style.filter = "none";
-        this.innerHTML = "Change VIBE";
-    } else {
-        document.body.style.filter = "invert(1) hue-rotate(180deg)";
-        this.innerHTML = "Inverted Mode";
+// ---------- wallpaper + sharingan ----------
+var walls = ["url('obito-bg.jpg')", "linear-gradient(black, #2b0a3d)", "linear-gradient(#0b0b2b, black)"];
+var wallNum = 0;
+
+function changeWall() {
+  wallNum++;
+  if (wallNum == walls.length) wallNum = 0;
+  document.body.style.backgroundImage = walls[wallNum];
+}
+
+function toggleVibe() {
+  document.body.classList.toggle("sharingan");
+}
+
+// ---------- terminal ----------
+var termInput = document.getElementById("terminput");
+var termOut = document.getElementById("termout");
+
+termInput.onkeydown = function(e) {
+  if (e.keyCode == 13) {
+    var cmd = termInput.value.toLowerCase().trim();
+    termOut.innerHTML += "> " + termInput.value + "<br>";
+
+    if (cmd == "help") {
+      termOut.innerHTML += "commands: help, clear, lore, creator, date, sharingan<br>";
+    } else if (cmd == "clear") {
+      termOut.innerHTML = "";
+    } else if (cmd == "lore") {
+      termOut.innerHTML += "Obito Uchiha wanted to create an infinite dream.<br>";
+    } else if (cmd == "creator") {
+      termOut.innerHTML += "made by a dev saving up for an AULA F75 keyboard<br>";
+    } else if (cmd == "date") {
+      termOut.innerHTML += new Date().toDateString() + "<br>";
+    } else if (cmd == "sharingan") {
+      toggleVibe();
+      termOut.innerHTML += "eye activated 👁<br>";
+    } else if (cmd != "") {
+      termOut.innerHTML += "unknown command: " + cmd + " (try help)<br>";
     }
-});
 
-// Wallpaper Cycler
-var wallIndex = 0;
-var wallColors = [
-    "url('obito-bg.jpg') center/cover no-repeat",
-    "radial-gradient(circle, #1a0000 0%, #000000 100%)",
-    "radial-gradient(circle, #0a0a1a 0%, #000000 100%)"
-];
-var wallNames = ["Red", "Dark Void", "Midnight"];
+    termInput.value = "";
+    termOut.scrollTop = termOut.scrollHeight;
+  }
+};
 
-document.querySelector("#wallpaper_btn").addEventListener("click", function() {
-    wallIndex = (wallIndex + 1) % wallColors.length;
-    document.body.style.background = wallColors[wallIndex];
-    this.innerHTML = "Wallpaper: " + wallNames[wallIndex];
-});
+// ---------- sticky notes ----------
+var stickyCount = 0;
 
-// Terminal Engine
-let termInput = document.querySelector("#term_input");
-let termOutput = document.querySelector("#term_output");
+function addSticky() {
+  stickyCount++;
+  var note = document.createElement("div");
+  note.className = "sticky";
+  note.id = "sticky" + stickyCount;
+  note.style.left = (400 + stickyCount * 25) + "px";
+  note.style.top = (120 + stickyCount * 25) + "px";
+  note.innerHTML = '<div class="stickybar" id="sticky' + stickyCount + 'header">note ' + stickyCount +
+    '<span class="sx" onclick="this.parentNode.parentNode.remove()">x</span></div>' +
+    '<textarea placeholder="write something..."></textarea>';
+  document.body.appendChild(note);
+  dragElement(note);
+  z++;
+  note.style.zIndex = z;
+}
 
-termInput.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-        let val = termInput.value.trim().toLowerCase();
-        termOutput.innerHTML += `> ${termInput.value}<br>`;
-        
-        if (val === "help") {
-            termOutput.innerHTML += `commands: help, clear, lore, creator<br>`;
-        } else if (val === "clear") {
-            termOutput.innerHTML = `Cleared.<br>`;
-        } else if (val === "lore") {
-            termOutput.innerHTML += `Obito Uchiha wanted to create an infinite dream.<br>`;
-        } else if (val === "creator") {
-            termOutput.innerHTML += `Built by a developer grinding for that AULA F75 keyboard.<br>`;
-        } else {
-            termOutput.innerHTML += `Unknown: ${val}. Type 'help'.<br>`;
-        }
-        
-        termInput.value = "";
-        termOutput.scrollTop = termOutput.scrollHeight;
-    }
-});
-
-// Dynamic Sticky Note Creator
-document.querySelector("#sticky_app_icon").addEventListener("click", function() {
-    let container = document.querySelector("#sticky_container");
-    
-    let noteDiv = document.createElement("div");
-    noteDiv.className = "sticky_note";
-    
-    layerIndex++;
-    noteDiv.style.zIndex = layerIndex;
-    
-    let noteTitle = document.createElement("b");
-    noteTitle.innerText = "Sticky Note:";
-    
-    let deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "❌";
-    deleteBtn.style.float = "right";
-    deleteBtn.style.background = "none";
-    deleteBtn.style.border = "none";
-    deleteBtn.style.cursor = "pointer";
-    deleteBtn.addEventListener("click", () => container.removeChild(noteDiv));
-    
-    let noteInput = document.createElement("textarea");
-    noteInput.placeholder = "Type your note here...";
-    
-    noteDiv.appendChild(deleteBtn);
-    noteDiv.appendChild(noteTitle);
-    noteDiv.appendChild(document.createElement("br"));
-    noteDiv.appendChild(noteInput);
-    container.appendChild(noteDiv);
-
-    // Draggable Sticky Note Logic
-    let draggingSticky = false;
-    let sX = 0, sY = 0;
-
-    noteDiv.addEventListener("mousedown", function(e) {
-        if (e.target === noteInput || e.target === deleteBtn) return;
-        draggingSticky = true;
-        sX = e.clientX - noteDiv.offsetLeft;
-        sY = e.clientY - noteDiv.offsetTop;
-        layerIndex++;
-        noteDiv.style.zIndex = layerIndex;
-    });
-
-    document.addEventListener("mousemove", function(e) {
-        if (!draggingSticky) return;
-        noteDiv.style.left = (e.clientX - sX) + "px";
-        noteDiv.style.top = (e.clientY - sY) + "px";
-    });
-
-    document.addEventListener("mouseup", () => draggingSticky = false);
-});
-
-// Universal Window Dragging Logic via standard dragzones
-let activeWindow = null;
-let startX = 0, startY = 0;
-
-document.querySelectorAll(".app_window").forEach(win => {
-    let dragzone = win.querySelector(".dragzone");
-    if (dragzone) {
-        dragzone.addEventListener("mousedown", (e) => {
-            if (e.target.classList.contains("close_btn")) return;
-            activeWindow = win;
-            startX = e.clientX - win.offsetLeft;
-            startY = e.clientY - win.offsetTop;
-            
-            layerIndex++;
-            win.style.zIndex = layerIndex;
-        });
-    }
-});
-
-document.addEventListener("mousemove", (e) => {
-    if (!activeWindow) return;
-    activeWindow.style.left = (e.clientX - startX) + "px";
-    activeWindow.style.top = (e.clientY - startY) + "px";
-    activeWindow.style.transform = "none";
-});
-
-document.addEventListener("mouseup", () => activeWindow = null);
+// show the welcome window when the page loads
+openWin("welcome");
